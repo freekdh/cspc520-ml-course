@@ -1,0 +1,24 @@
+S = 1000;
+C = rand(100,1);
+D = squareform(pdist(C,'euclidean'));
+%A = exp(-S*D.^2);
+A = sqrt(1+S*D.^2);
+B = C.*C;
+W = linsolve(A,B);
+
+X = linspace(-1,2,100);
+Y = arrayfun(@(z) predictdy(z,W,C,S), X);
+
+plot(X,Y)
+hold on 
+plot(X,X.*X)
+hold off
+
+function y = predicty(x,W,C,S)
+    sqrt(S)*
+end
+
+function dy = predictdy(x,W,C,S)
+%dy = dot(W,exp(-S*(x-C).^2));
+dy = dot(W,sqrt(1+S*(x-C).^2));
+end
